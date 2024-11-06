@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <div className='log-in'>
       <img src={logo} alt="" className='login-logo' />
-      <div>
+      <div className='login-form'>
         <h2>Sign Up</h2>
         <form action="">
           <input type="text" placeholder='Your name' />
