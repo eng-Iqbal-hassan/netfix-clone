@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './TitleCards.css'
 import cards_data from '../../assets/cards/Cards_data'
 import './TitleCards.css'
@@ -7,7 +7,6 @@ const TitleCards = ({title, category}) => {
 
 
   const [apiData, setApiData] = useState([])
-  const cardsRef =  useRef();
   const handleWheel =  (event) => {
     event.preventDefault();  
     cardsRef.current.scrollLeft += event.deltaY;
@@ -25,7 +24,6 @@ const TitleCards = ({title, category}) => {
     .then(res => res.json())
     .then(res => setApiData(res.results))
     .catch(err => console.error(err));
-    cardsRef.current.addEventListener('wheel', handleWheel)
   },[])
 
   return (
@@ -33,7 +31,7 @@ const TitleCards = ({title, category}) => {
       <h2>{title?title:'Popular on Netflix'}</h2>
       <div className='card-list'>
       {apiData.map((data, index)=>(
-        <div key={index} className='card' ref={cardsRef}>
+        <div key={index} className='card'>
           <img src={`https://image.tmdb.org/t/p/w500`+data?.backdrop_path} alt="" />
           <p>{data?.original_title}</p>
         </div>
