@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import './TitleCards.css'
 import cards_data from '../../assets/cards/Cards_data'
 import './TitleCards.css'
+import { Link } from 'react-router-dom'
 
 const TitleCards = ({title, category}) => {
 
@@ -31,10 +32,10 @@ const TitleCards = ({title, category}) => {
       <h2>{title?title:'Popular on Netflix'}</h2>
       <div className='card-list'>
       {apiData.map((data, index)=>(
-        <div key={index} className='card'>
+        <Link to={`/player/${data.id}`} key={index} className='card'>
           <img src={`https://image.tmdb.org/t/p/w500`+data?.backdrop_path} alt="" />
           <p>{data?.original_title}</p>
-        </div>
+        </Link>
       ))}
       </div>
     </div>
