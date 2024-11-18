@@ -69,7 +69,7 @@
 .nav-dark {
     background-color: #141414;
 }
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
     .navbar {
         padding: 20px 4%;
     }
