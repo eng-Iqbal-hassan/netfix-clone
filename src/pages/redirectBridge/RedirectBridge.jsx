@@ -3,12 +3,22 @@ import { useEffect } from "react";
 
 const RedirectBridge = () => {
   useEffect(() => {
-    const url = new URLSearchParams(window.location.search).get("target");
+    const currentUrl = window.location.href.split('?target=')[1];
+    
+    if (currentUrl) {
+      const decodedUrl = decodeURIComponent(currentUrl);
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    if (url) {
-      // Slight delay to ensure rendering
       setTimeout(() => {
-        window.location.href = url;
+        if (/iPhone|iPad|iPod/i.test(userAgent)) {
+          window.location.href = "x-web-search://" + decodedUrl;
+        } else if (/Android/i.test(userAgent)) {
+          window.location.href = 
+            "intent://" + decodedUrl.replace(/^https?:\/\//, "") + 
+            "#Intent;scheme=https;package=com.android.chrome;end;";
+        } else {
+          window.location.href = decodedUrl;
+        }
       }, 500);
     }
   }, []);
