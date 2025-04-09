@@ -65,7 +65,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/player/:id' element={<Player />} />
-        <Route path='/redirect' element={<RedirectBridge />} />
+        <Route path="/redirect-bridge" element={<RedirectBridge />} />
       </Routes>
     </div>
   );
