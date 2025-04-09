@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
-import { Route, Routes, useNavigate } from "react-router-dom";
 import Player from "./pages/player/Player";
+import RedirectBridge from "./pages/redirectBridge/RedirectBridge";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { ToastContainer } from "react-toastify";
@@ -24,10 +25,10 @@ const App = () => {
     });
   }, []);
 
-  // In-App Browser Redirect
+  // In-App Browser Redirect (via /redirect page)
   useEffect(() => {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    const url = window.location.href;
+    const currentURL = window.location.href;
 
     function isInAppBrowser() {
       return (
@@ -46,17 +47,14 @@ const App = () => {
       );
     }
 
-    function openInDefaultBrowser() {
-      if (/iPhone|iPad|iPod/i.test(userAgent)) {
-        window.location.href = "x-web-search:" + url;
-      } else if (/Android/i.test(userAgent)) {
-        window.location.href =
-          "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end;";
-      }
+    function redirectToBridge() {
+      const encodedURL = encodeURIComponent(currentURL);
+      const redirectBridgeURL = `${window.location.origin}/redirect?target=${encodedURL}`;
+      window.location.href = redirectBridgeURL;
     }
 
     if (isInAppBrowser()) {
-      openInDefaultBrowser();
+      redirectToBridge();
     }
   }, []);
 
@@ -67,6 +65,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/player/:id' element={<Player />} />
+        <Route path='/redirect' element={<RedirectBridge />} />
       </Routes>
     </div>
   );
