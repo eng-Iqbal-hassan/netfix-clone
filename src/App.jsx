@@ -47,9 +47,10 @@ const App = () => {
       );
     }
 
+    // In your redirectToBridge function
     function redirectToBridge() {
       const encodedURL = encodeURIComponent(currentURL);
-      const redirectBridgeURL = `${window.location.origin}/redirect?target=${encodedURL}`;
+      const redirectBridgeURL = `${window.location.origin}/redirect-bridge?target=${encodedURL}`; // Changed from /redirect to /redirect-bridge
       window.location.href = redirectBridgeURL;
     }
 
@@ -65,7 +66,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/player/:id' element={<Player />} />
-        <Route path="/redirect-bridge" element={<RedirectBridge />} />
+        <Route path="/redirect-bridge" element={<RedirectBridge />} /> {/* This matches the redirect path now */}
       </Routes>
     </div>
   );
