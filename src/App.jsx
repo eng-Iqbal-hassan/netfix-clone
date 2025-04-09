@@ -47,11 +47,12 @@ const App = () => {
       );
     }
 
-    // In your redirectToBridge function
     function redirectToBridge() {
-      const encodedURL = encodeURIComponent(currentURL);
-      const redirectBridgeURL = `${window.location.origin}/redirect-bridge?target=${encodedURL}`; // Changed from /redirect to /redirect-bridge
-      window.location.href = redirectBridgeURL;
+      // Make sure to encode the full URL including protocol
+      const fullUrl = currentURL.includes('http') ? currentURL : `https://${window.location.host}${window.location.pathname}`;
+      const encodedURL = encodeURIComponent(fullUrl);
+      const redirectBridgeURL = `${window.location.origin}/redirect-bridge?target=${encodedURL}`;
+      window.location.replace(redirectBridgeURL);
     }
 
     if (isInAppBrowser()) {

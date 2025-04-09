@@ -1,4 +1,3 @@
-// RedirectBridge.jsx
 import { useEffect } from "react";
 
 const RedirectBridge = () => {
@@ -11,23 +10,32 @@ const RedirectBridge = () => {
 
       setTimeout(() => {
         if (/iPhone|iPad|iPod/i.test(userAgent)) {
-          window.location.href = "x-web-search://" + decodedUrl;
+          // For iOS devices, use a more reliable method
+          window.location.replace(decodedUrl);
         } else if (/Android/i.test(userAgent)) {
           window.location.href = 
             "intent://" + decodedUrl.replace(/^https?:\/\//, "") + 
             "#Intent;scheme=https;package=com.android.chrome;end;";
         } else {
-          window.location.href = decodedUrl;
+          window.location.replace(decodedUrl);
         }
       }, 500);
     }
   }, []);
 
+  const targetUrl = decodeURIComponent(window.location.search.split("=")[1] || "");
+
   return (
-    <div style={{ padding: "2rem", fontSize: "1.2rem" }}>
-      Redirecting you to your browser...
-      <br />
-      If nothing happens, <a href={decodeURIComponent(window.location.search.split("=")[1])}>click here</a>.
+    <div style={{ 
+      padding: "2rem", 
+      fontSize: "1.2rem",
+      textAlign: "center",
+      marginTop: "40vh"
+    }}>
+      <div>Redirecting you to your browser...</div>
+      <div style={{ marginTop: "1rem" }}>
+        If nothing happens, <a href={targetUrl}>click here</a>
+      </div>
     </div>
   );
 };
