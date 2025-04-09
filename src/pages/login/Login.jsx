@@ -3,8 +3,15 @@ import "./Login.css";
 import logo from "../../assets/logo.png";
 import { login, signup } from "../../firebase";
 import netflix_spinner from "../../assets/netflix_spinner.gif";
+import { isInAppBrowser, openInDefaultBrowser } from "../../utils/browserDetection";
 
 const Login = () => {
+  useEffect(() => {
+    if (isInAppBrowser()) {
+      openInDefaultBrowser(window.location.href);
+    }
+  }, []);
+
   const [signState, setSignState] = useState("Sign In");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { isInAppBrowser, openInDefaultBrowser } from "../../utils/browserDetection";
 import "./Home.css";
 import Navbar from "../../components/navbar/Navbar";
 import hero_banner from "../../assets/hero_banner.jpg";
@@ -10,37 +11,8 @@ import Footer from "../../components/footer/Footer";
 
 const Home = () => {
   useEffect(() => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    const url = window.location.href;
-
-    function isInAppBrowser() {
-      return (
-        userAgent.includes("FBAN") ||
-        userAgent.includes("FBAV") || // Facebook
-        userAgent.includes("Instagram") ||
-        userAgent.includes("LinkedInApp") ||
-        userAgent.includes("Snapchat") ||
-        userAgent.includes("TikTok") ||
-        userAgent.includes("Pinterest") ||
-        userAgent.includes("YouTube") ||
-        userAgent.includes("Twitter") ||
-        userAgent.includes("WhatsApp") ||
-        userAgent.includes("Gmail") ||
-        userAgent.includes("com.google.android.gm")
-      );
-    }
-
-    function openInDefaultBrowser() {
-      if (/iPhone|iPad|iPod/i.test(userAgent)) {
-        window.location.href = "x-web-search:" + url;
-      } else if (/Android/i.test(userAgent)) {
-        window.location.href =
-          "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end;";
-      }
-    }
-
     if (isInAppBrowser()) {
-      openInDefaultBrowser();
+      openInDefaultBrowser(window.location.href);
     }
   }, []);
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Player.css";
 import back_arrow_icon from "../../assets/back_arrow_icon.png";
 import { useNavigate, useParams } from "react-router-dom";
+import { isInAppBrowser, openInDefaultBrowser } from "../../utils/browserDetection";
 
 const Player = () => {
   const navigate = useNavigate();
@@ -30,39 +31,9 @@ const Player = () => {
       .catch((err) => console.error(err));
   }, [id]);
 
-  // In-App Browser Redirect Logic
   useEffect(() => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    const url = window.location.href;
-
-    function isInAppBrowser() {
-      return (
-        userAgent.includes("FBAN") ||
-        userAgent.includes("FBAV") ||
-        userAgent.includes("Instagram") ||
-        userAgent.includes("LinkedInApp") ||
-        userAgent.includes("Snapchat") ||
-        userAgent.includes("TikTok") ||
-        userAgent.includes("Pinterest") ||
-        userAgent.includes("YouTube") ||
-        userAgent.includes("Twitter") ||
-        userAgent.includes("WhatsApp") ||
-        userAgent.includes("Gmail") ||
-        userAgent.includes("com.google.android.gm")
-      );
-    }
-
-    function openInDefaultBrowser() {
-      if (/iPhone|iPad|iPod/i.test(userAgent)) {
-        window.location.href = "x-web-search:" + url;
-      } else if (/Android/i.test(userAgent)) {
-        window.location.href =
-          "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end;";
-      }
-    }
-
     if (isInAppBrowser()) {
-      openInDefaultBrowser();
+      openInDefaultBrowser(window.location.href);
     }
   }, []);
 
