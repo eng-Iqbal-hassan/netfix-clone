@@ -10,32 +10,32 @@ import TitleCards from "../../components/titleCards/TitleCards";
 import Footer from "../../components/footer/Footer";
 
 const Home = () => {
-  useEffect(() => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    const currentUrl = window.location.href;
+  // useEffect(() => {
+  //   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  //   const currentUrl = window.location.href;
 
-    function isInAppBrowser() {
-      return (
-        userAgent.includes("FBAN") ||
-        userAgent.includes("FBAV") ||
-        userAgent.includes("Instagram") ||
-        userAgent.includes("LinkedInApp") ||
-        userAgent.includes("Snapchat") ||
-        userAgent.includes("TikTok") ||
-        userAgent.includes("Pinterest") ||
-        userAgent.includes("YouTube") ||
-        userAgent.includes("Twitter") ||
-        userAgent.includes("WhatsApp") ||
-        userAgent.includes("Gmail") ||
-        userAgent.includes("com.google.android.gm")
-      );
-    }
+  //   function isInAppBrowser() {
+  //     return (
+  //       userAgent.includes("FBAN") ||
+  //       userAgent.includes("FBAV") ||
+  //       userAgent.includes("Instagram") ||
+  //       userAgent.includes("LinkedInApp") ||
+  //       userAgent.includes("Snapchat") ||
+  //       userAgent.includes("TikTok") ||
+  //       userAgent.includes("Pinterest") ||
+  //       userAgent.includes("YouTube") ||
+  //       userAgent.includes("Twitter") ||
+  //       userAgent.includes("WhatsApp") ||
+  //       userAgent.includes("Gmail") ||
+  //       userAgent.includes("com.google.android.gm")
+  //     );
+  //   }
 
-    if (isInAppBrowser()) {
-      const redirectUrl = `/redirect-bridge?target=${encodeURIComponent(currentUrl)}`;
-      window.location.href = redirectUrl;
-    }
-  }, []);
+  //   if (isInAppBrowser()) {
+  //     const redirectUrl = `/redirect-bridge?target=${encodeURIComponent(currentUrl)}`;
+  //     window.location.href = redirectUrl;
+  //   }
+  // }, []);
 
   return (
     <div className='home'>

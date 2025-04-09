@@ -6,11 +6,7 @@ import netflix_spinner from "../../assets/netflix_spinner.gif";
 import { isInAppBrowser, openInDefaultBrowser } from "../../utils/browserDetection";
 
 const Login = () => {
-  useEffect(() => {
-    if (isInAppBrowser()) {
-      openInDefaultBrowser(window.location.href);
-    }
-  }, []);
+
 
   const [signState, setSignState] = useState("Sign In");
   const [name, setName] = useState("");
@@ -18,40 +14,40 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    const url = window.location.href;
+  // useEffect(() => {
+  //   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  //   const url = window.location.href;
 
-    function isInAppBrowser() {
-      return (
-        userAgent.includes("FBAN") ||
-        userAgent.includes("FBAV") || // Facebook
-        userAgent.includes("Instagram") ||
-        userAgent.includes("LinkedInApp") ||
-        userAgent.includes("Snapchat") ||
-        userAgent.includes("TikTok") ||
-        userAgent.includes("Pinterest") ||
-        userAgent.includes("YouTube") ||
-        userAgent.includes("Twitter") ||
-        userAgent.includes("WhatsApp") ||
-        userAgent.includes("Gmail") ||
-        userAgent.includes("com.google.android.gm")
-      );
-    }
+  //   function isInAppBrowser() {
+  //     return (
+  //       userAgent.includes("FBAN") ||
+  //       userAgent.includes("FBAV") || // Facebook
+  //       userAgent.includes("Instagram") ||
+  //       userAgent.includes("LinkedInApp") ||
+  //       userAgent.includes("Snapchat") ||
+  //       userAgent.includes("TikTok") ||
+  //       userAgent.includes("Pinterest") ||
+  //       userAgent.includes("YouTube") ||
+  //       userAgent.includes("Twitter") ||
+  //       userAgent.includes("WhatsApp") ||
+  //       userAgent.includes("Gmail") ||
+  //       userAgent.includes("com.google.android.gm")
+  //     );
+  //   }
 
-    function openInDefaultBrowser() {
-      if (/iPhone|iPad|iPod/i.test(userAgent)) {
-        window.location.href = "x-web-search:" + url;
-      } else if (/Android/i.test(userAgent)) {
-        window.location.href =
-          "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end;";
-      }
-    }
+  //   function openInDefaultBrowser() {
+  //     if (/iPhone|iPad|iPod/i.test(userAgent)) {
+  //       window.location.href = "x-web-search:" + url;
+  //     } else if (/Android/i.test(userAgent)) {
+  //       window.location.href =
+  //         "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end;";
+  //     }
+  //   }
 
-    if (isInAppBrowser()) {
-      openInDefaultBrowser();
-    }
-  }, []);
+  //   if (isInAppBrowser()) {
+  //     openInDefaultBrowser();
+  //   }
+  // }, []);
 
   const user_auth = async (e) => {
     e.preventDefault();

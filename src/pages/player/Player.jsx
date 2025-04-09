@@ -31,11 +31,6 @@ const Player = () => {
       .catch((err) => console.error(err));
   }, [id]);
 
-  useEffect(() => {
-    if (isInAppBrowser()) {
-      openInDefaultBrowser(window.location.href);
-    }
-  }, []);
 
   return (
     <div className='player'>
